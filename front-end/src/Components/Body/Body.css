@@ -53,6 +53,8 @@ input:focus{
 }
 
 .body__posts{
+    display: flex;
+    flex-direction: column;
     flex: 0.75;
     overflow-y: scroll;
 }
