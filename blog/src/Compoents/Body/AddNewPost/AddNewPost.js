@@ -15,7 +15,6 @@ function AddNewPost() {
     const [title, setTitle] = useState([]);
     const [ideas, setIdeas] = useState([]);
     const [already, setAlredy] = useState([]);
-    const [newArray, setNewArray] = useState([]);
     
 
     useEffect(() => {
@@ -72,16 +71,6 @@ function AddNewPost() {
                 console.error("Error adding document: ", error);
             });
 
-
-            // console.log("Id:-",id)
-
-            // db.collection("blog").doc(id).collection("messages").add({
-            //     name: user,
-            //     title: title,
-            //     ideas: ideas,
-            //     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
-            // })
-
             
         } else {
             db.collection("blog").doc(id).collection("messages").add({
@@ -92,7 +81,7 @@ function AddNewPost() {
             })
         }
 
-        history.push('/')
+        history.push('/:id')
 
     }
 
