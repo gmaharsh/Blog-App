@@ -17,7 +17,7 @@ function Header() {
                     alt="" />
             </div>
             <div className="navbar__items">
-                <Link to="/addnewPost">
+                <Link className="navbar__link" to="/addnewPost">
                     <h3>Post</h3>
                 </Link>
                 <Avatar />

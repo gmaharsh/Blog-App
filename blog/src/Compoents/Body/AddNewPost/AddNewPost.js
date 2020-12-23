@@ -15,6 +15,7 @@ function AddNewPost() {
     const [title, setTitle] = useState([]);
     const [ideas, setIdeas] = useState([]);
     const [already, setAlredy] = useState([]);
+    const [newArray, setNewArray] = useState([]);
     
 
     useEffect(() => {
@@ -26,13 +27,20 @@ function AddNewPost() {
         ))
     }, [])
 
-    
-    // var select = topic.map((t) => ({
-    //     label: t.data.name,
-        
-    // }))
+    const addNewDocument = (id) => {
+        console.log("Id at new Document:-", id)
+        console.log("user:-", user)
+        console.log("ideas:-", ideas)
+        console.log("title:-", title)
 
-    // console.log("Select>>", topic)
+        db.collection("blog").doc(id).collection("messages").add({
+                name: user,
+                title: title,
+                ideas: ideas,
+                timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        
+    }
     
 
     const newPost = (e) => {
@@ -49,7 +57,6 @@ function AddNewPost() {
                 break;
             } else {
                 console.log("False")
-                // db.collection()
                 value = false;
             }
         }
@@ -58,6 +65,24 @@ function AddNewPost() {
             db.collection("blog").add({
                 name: topic
             })
+            .then(function (docRef) {
+                addNewDocument(docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+
+
+            // console.log("Id:-",id)
+
+            // db.collection("blog").doc(id).collection("messages").add({
+            //     name: user,
+            //     title: title,
+            //     ideas: ideas,
+            //     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+            // })
+
+            
         } else {
             db.collection("blog").doc(id).collection("messages").add({
                 name: user,

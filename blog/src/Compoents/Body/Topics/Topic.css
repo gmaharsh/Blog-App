@@ -7,4 +7,10 @@
 
 .topic > h3{
     flex: 1;
+    color: black;
+    text-decoration: none;
+}
+
+.topic__link{
+    text-decoration: none;
 }
