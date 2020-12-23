@@ -38,3 +38,16 @@
     display: flex;
     align-items: center;
 }
+
+
+.post__buttons >  button{
+    float: right;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    margin-left: 20px;
+    height: 50px;
+    width: 100px;
+    border: none;
+    font-size: 15px;
+}

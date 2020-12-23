@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import db from '../../../firebase';
+import AddNewPost from '../AddNewPost/AddNewPost';
 import './Post.css';
 
-function Post({ roomId, id,  name, ideas, title }) {
+function Post({ roomId, id,  name, ideas, title, timestamp }) {
 
     const [messages, setMessages] = useState([]);
 
@@ -16,10 +18,18 @@ function Post({ roomId, id,  name, ideas, title }) {
             })
     }
 
+    const editPost = (id) => {
+        return (
+            <Link to="/addNewPost" >
+                <AddNewPost  id={id} />
+            </Link>
+        )
+    }
+
 
 
     return (
-        <div onClick={e => deletePost(id)} className="post">
+        <div  className="post">
             <div className="post__title">
                 <h1>{title}</h1>
             </div>
@@ -33,8 +43,14 @@ function Post({ roomId, id,  name, ideas, title }) {
                 </div>
                 <div className="post__Date">
                     <h4>Added By:-</h4>
-                    <p>December 20, 2020</p>
+                    <p>{timestamp?.toDate().toUTCString()}</p>
                 </div>
+            </div>
+            <div className="post__buttons">
+                <button onClick={() => deletePost(id)}>Delete Post</button>
+                {/* <Link className="" to="/addNewPost"> */}
+                    <button onClick={() => editPost(id)}>Edit Post</button>
+                {/* </Link> */}
             </div>
         </div>
     )
