@@ -81,7 +81,7 @@ function AddNewPost() {
             })
         }
 
-        history.push('/:id')
+        history.push('/')
 
     }
 

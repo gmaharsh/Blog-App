@@ -7,7 +7,7 @@ function Topic({ id, name }) {
     
     // console.log(name)
     return (
-        <Link to={`/${id}`}>
+        <Link className="topic__link" to={`/${id}`}>
             <div className="topic">
                 <h3>{name}</h3>
             <ArrowForwardIosIcon />

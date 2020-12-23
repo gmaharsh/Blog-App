@@ -14,7 +14,7 @@ function Body() {
     const { roomId } = useParams()
     console.log(roomId)
     // console.log("topic a>>>>", topics)
-    console.log("Message at :- ", messages)
+    // console.log("Message at :- ", messages)
 
     useEffect(() => {
         const unsubscribe = db.collection("blog").onSnapshot((snapshot) => setTopic(
@@ -29,14 +29,15 @@ function Body() {
     }, [])
 
     useEffect(() => {
-        db.collection("blog").doc(roomId).collection("messages").onSnapshot(snapshot => (
-            setMessages(
-                snapshot.docs.map((doc) => doc.data())
-            )
+        db.collection("blog").doc(roomId).collection("messages").onSnapshot((snapshot) => setMessages(
+            snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+           }))
         ))
     }, [roomId])
 
-    // console.log(topics[0].id)
+    console.log("messages:", messages)
 
 
         
@@ -57,7 +58,7 @@ function Body() {
             <div className="body__posts">
                 {/* <h1>{roomId}</h1> */}
                 {messages.map(message => (
-                    <Post title={message.title} ideas = {message.ideas} name={message.name} timestamp={message.timestamp} />
+                    <Post roomId = {roomId} id={message.id}  title={message.data.title} ideas = {message.data.ideas} name={message.data.name} timestamp={message.data.timestamp} />
                 ))}
 
             </div>

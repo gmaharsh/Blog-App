@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react';
 import db from '../../../firebase';
 import './Post.css';
 
-function Post({ name, ideas, title }) {
+function Post({ roomId, id,  name, ideas, title }) {
 
     const [messages, setMessages] = useState([]);
 
+    const deletePost = (id) => {
+        db.collection("blog").doc(roomId).collection("messages").doc(id).delete()
+            .then(function () {
+                console.log("Deleted")
+            })
+            .catch(function (error) {
+                console.error("Error removing document: ", error);
+            })
+    }
+
+
 
     return (
-        <div className="post">
+        <div onClick={e => deletePost(id)} className="post">
             <div className="post__title">
                 <h1>{title}</h1>
             </div>
