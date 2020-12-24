@@ -48,9 +48,9 @@ function Post({ roomId, id,  name, ideas, title, timestamp }) {
             </div>
             <div className="post__buttons">
                 <button onClick={() => deletePost(id)}>Delete Post</button>
-                {/* <Link className="" to="/addNewPost"> */}
-                    <button onClick={() => editPost(id)}>Edit Post</button>
-                {/* </Link> */}
+                <Link className="post__editButton"  to={`/editPost/${roomId}/${id}`}>
+                    <button>Edit Post</button>
+                </Link>
             </div>
         </div>
     )

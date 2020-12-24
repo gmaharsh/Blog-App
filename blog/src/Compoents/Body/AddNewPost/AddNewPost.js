@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import db from '../../../firebase';
 import './AddNewPost.css';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Select from 'react-select';
 import firebase from 'firebase';
 
@@ -10,12 +10,30 @@ function AddNewPost() {
 
     const history = useHistory();
 
+    const roomId = useParams();
+    const id = useParams();
+    // console.log("roomId", roomId.id)
+
+    var edit = false;
+
+    console.log( (roomId.roomId)) 
+    console.log((roomId.id)) 
+
+    
+    if (typeof(roomId.id) != "undefined") {
+        // console.log("there is some room id")
+        edit = true;
+    } else {
+        // console.log("There is no room id")
+        edit = false
+    }
+    
+
     const [user, setUser] = useState([]);
     const [topic, setTopic] = useState([]);
     const [title, setTitle] = useState([]);
     const [ideas, setIdeas] = useState([]);
     const [already, setAlredy] = useState([]);
-    
 
     useEffect(() => {
         db.collection("blog").onSnapshot((snapshot) => setAlredy(
@@ -25,6 +43,12 @@ function AddNewPost() {
             }))
         ))
     }, [])
+
+    
+
+    console.log("already:-", already)
+
+
 
     const addNewDocument = (id) => {
         console.log("Id at new Document:-", id)
@@ -119,11 +143,15 @@ function AddNewPost() {
 
                         ></textarea>
                     </div>
-                    <button
+                    {(edit) ? <button
                         className="login__signInButton"
                         type="submit"
                         onClick={newPost}
-                    >Post</button>
+                    >Update</button> : <button
+                        className="login__signInButton"
+                        type="submit"
+                        onClick={newPost}
+                    >Post</button>}                    
                 </form>
             </div>
         </div>
